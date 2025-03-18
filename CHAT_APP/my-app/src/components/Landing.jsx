@@ -13,9 +13,7 @@ const Landing = () => {
     <div className="landing-container">
       <nav className="nav-bar">
         <div className="logo">ZeroOne</div>
-        <button className="get-started-btn" onClick={handleSignUpClick}>
-          Get Started
-        </button>
+        <button className="get-started-btn">Get Started</button>
       </nav>
 
       <div className="landing-content">
