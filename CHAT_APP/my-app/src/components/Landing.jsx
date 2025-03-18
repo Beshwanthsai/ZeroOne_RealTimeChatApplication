@@ -1,20 +1,31 @@
-import React from 'react';
-import '../styles/components/Landing.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import "../styles/components/Landing.css";
 
 const Landing = () => {
+  const navigate = useNavigate();
+
+  const handleSignUpClick = () => {
+    navigate("/signup");
+  };
+
   return (
     <div className="landing-container">
       <nav className="nav-bar">
         <div className="logo">ZeroOne</div>
-        <button className="get-started-btn">Get Started</button>
+        <button className="get-started-btn" onClick={handleSignUpClick}>
+          Get Started
+        </button>
       </nav>
 
       <div className="landing-content">
         <div className="hero-section">
           <h1>Welcome to ZeroOne Chat</h1>
-          <p className="subtitle">Connect instantly with friends and colleagues</p>
+          <p className="subtitle">
+            Connect instantly with friends and colleagues
+          </p>
         </div>
-        
+
         <div className="features">
           <div className="feature-item">
             <i className="fas fa-bolt"></i>
@@ -34,7 +45,9 @@ const Landing = () => {
         </div>
 
         <div className="cta-section">
-          <button className="cta-button">Start Chatting Now</button>
+          <button className="cta-button" onClick={handleSignUpClick}>
+            Start Chatting Now
+          </button>
         </div>
       </div>
     </div>
