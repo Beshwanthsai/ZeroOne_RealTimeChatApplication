@@ -1,7 +1,7 @@
-import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Landing from "./components/Landing";
-import SignUp from "./components/SignUp";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Landing from './components/Landing';
+import SignUp from './components/SignUp';
 
 const App = () => {
   return (
