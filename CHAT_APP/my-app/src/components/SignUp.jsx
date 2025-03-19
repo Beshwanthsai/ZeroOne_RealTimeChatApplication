@@ -6,16 +6,38 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [isFlipped, setIsFlipped] = useState(false);
 
+  // Handle Form Submission (Prevent Default)
   const handleSubmit = (e) => {
     e.preventDefault();
   };
 
   return (
     <div className="signup-container">
+      {/* Button to go back to the Landing Page */}
+      <button
+        className="back-button"
+        onClick={(() => navigate("/"))}
+        style={{
+          position: "absolute",
+          top: "10px",
+          left: "10px",
+          padding: "8px 16px",
+          backgroundColor: "#007bff",
+          color: "white",
+          border: "none",
+          borderRadius: "5px",
+          cursor: "pointer",
+          fontSize: "14px",
+        }}
+      >
+        Back to Home
+      </button>
+
       <div className="marq">
         <marquee behavior="" direction="left">ZeroOne</marquee>
       </div>
-      <div className={`card ${isFlipped ? 'is-flipped' : ''}`}>
+
+      <div className={`card ${isFlipped ? "is-flipped" : ""}`}>
         {/* Front of the card */}
         <div className="card-face card-front">
           <h2>Create Account</h2>
