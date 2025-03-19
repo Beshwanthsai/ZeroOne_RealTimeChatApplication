@@ -15,10 +15,3 @@ A real-time chat application built with **React** to allow users to send and rec
 
 - **React.js** – Frontend framework
 - **Node.js** – Backend server
-
-## Prerequisites
-
-To run this project locally, you'll need the following installed:
-
-- **Node.js** (v14 or later)
-- **npm** or **yarn** (package manager)
