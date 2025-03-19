@@ -1,59 +1,196 @@
 .signup-container {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
-    padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  padding: 20px;
+  perspective: 1000px;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 500px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.card-front {
+  z-index: 2;
+  transform: rotateY(0deg);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+}
+
+h2 {
+  color: #1e3c72;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.8rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #1e3c72;
+}
+
+.signup-button,
+.login-button {
+  width: 100%;
+  padding: 1rem;
+  background: #1e3c72;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.signup-button:hover,
+.login-button:hover {
+  background: #2a5298;
+  transform: translateY(-2px);
+}
+
+.login-link,
+.signup-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  color: #666;
+}
+
+.login-link span,
+.signup-link span {
+  color: #1e3c72;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 0.5rem;
+}
+
+.login-link span:hover,
+.signup-link span:hover {
+  text-decoration: underline;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+.card-face.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+.marq {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.marq marquee {
+  font-size: clamp(100px, 15vw, 200px);
+  font-weight: 900;
+  color: rgba(1, 7, 17, 0.1);
+  /* text-transform: uppercase; */
+  font-family: "Arial Black", sans-serif;
+  white-space: nowrap;
+  line-height: 1.5;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Add multiple marquee rows */
+.marq::before,
+.marq::after {
+  content: "ZeroOne";
+  position: absolute;
+  font-size: clamp(100px, 15vw, 200px);
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.1);
+  /* text-transform: uppercase; */
+  white-space: nowrap;
+  animation: marquee 60s linear infinite;
+}
+
+.marq::before {
+  top: 25%;
+  animation-direction: reverse;
+}
+
+.marq::after {
+  bottom: 25%;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
   }
-  
-  .signup-card {
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
+  100% {
+    transform: translateX(-100%);
   }
-  
-  .form-group {
-    margin-bottom: 1rem;
+}
+
+/* Ensure card content stays above the marquee */
+.card {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .marq marquee,
+  .marq::before,
+  .marq::after {
+    font-size: clamp(60px, 10vw, 100px);
   }
-  
-  .form-group input {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 1rem;
+}
+
+@media (max-width: 480px) {
+  .marq marquee,
+  .marq::before,
+  .marq::after {
+    font-size: clamp(40px, 8vw, 60px);
   }
-  
-  .signup-button {
-    width: 100%;
-    padding: 1rem;
-    background: #1e3c72;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-  }
-  
-  .signup-button:hover {
-    background: #2a5298;
-  }
-  
-  .login-link {
-    text-align: center;
-    margin-top: 1rem;
-  }
-  
-  .login-link span {
-    color: #1e3c72;
-    cursor: pointer;
-    font-weight: bold;
-  }
-  
-  .login-link span:hover {
-    text-decoration: underline;
-  }
+}
