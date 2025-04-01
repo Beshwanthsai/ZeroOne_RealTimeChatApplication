@@ -13,9 +13,11 @@
     "@clerk/clerk-react": "^5.25.0",
     "caniuse-lite": "^1.0.30001706",
     "dotenv": "^16.4.7",
+    "firebase": "^11.6.0",
     "framer-motion": "^12.5.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-firebase-hooks": "^5.1.1",
     "react-router-dom": "^7.3.0",
     "styled-components": "^6.1.16"
   },

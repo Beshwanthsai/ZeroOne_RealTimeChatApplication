@@ -1,13 +1,56 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+
+import { auth } from '../firebase/firebase';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import "../styles/components/SignUp.css";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const [isFlipped, setIsFlipped] = useState(false);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    username: ""
+  });
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSignUp = async (e) => {
     e.preventDefault();
+    setError("");
+    setLoading(true);
+    
+    try {
+      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      navigate("/dashboard"); // Create a dashboard route for authenticated users
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+    
+    try {
+      await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      navigate("/dashboard");
+    } catch (error) {
+      setError(error.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -19,22 +62,45 @@ const SignUp = () => {
       <div className="marq">
         <marquee behavior="" direction="left">ZeroOne</marquee>
       </div>
+      
       <div className={`card ${isFlipped ? 'is-flipped' : ''}`}>
-        {/* Front of the card */}
+       
         <div className="card-face card-front">
           <h2>Create Account</h2>
-          <form onSubmit={handleSubmit}>
+          {error && <div className="error-message">{error}</div>}
+          <form onSubmit={handleSignUp}>
             <div className="form-group">
-              <input type="text" placeholder="Username" required />
+              <input
+                type="text"
+                name="username"
+                placeholder="Username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
-              <input type="email" placeholder="Email" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
-              <input type="password" placeholder="Password" required />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
             </div>
-            <button type="submit" className="signup-button">
-              Sign Up
+            <button type="submit" className="signup-button" disabled={loading}>
+              {loading ? "Creating Account..." : "Sign Up"}
             </button>
           </form>
           <p className="login-link">
@@ -43,18 +109,33 @@ const SignUp = () => {
           </p>
         </div>
 
-        {/* Back of the card */}
+        {/* Back of the card - Sign In */}
         <div className="card-face card-back">
           <h2>Welcome Back</h2>
-          <form onSubmit={handleSubmit}>
+          {error && <div className="error-message">{error}</div>}
+          <form onSubmit={handleSignIn}>
             <div className="form-group">
-              <input type="email" placeholder="Email" required />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
             </div>
             <div className="form-group">
-              <input type="password" placeholder="Password" required />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
             </div>
-            <button type="submit" className="login-button">
-              Sign In
+            <button type="submit" className="login-button" disabled={loading}>
+              {loading ? "Signing In..." : "Sign In"}
             </button>
           </form>
           <p className="signup-link">

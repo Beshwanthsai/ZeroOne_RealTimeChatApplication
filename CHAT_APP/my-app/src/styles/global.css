@@ -16,9 +16,9 @@ body {
 button {
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
+input:focus {
+  outline: none;
 }
