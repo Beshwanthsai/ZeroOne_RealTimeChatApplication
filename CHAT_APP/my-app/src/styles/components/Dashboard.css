@@ -102,6 +102,11 @@
   border-top: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 0 0 12px 12px;
 }
+h2{
+  color: white;
+  font-size: 2rem;
+  margin: 0;
+}
 
 .message-input {
   flex: 1;
